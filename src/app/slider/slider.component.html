@@ -1,0 +1,64 @@
+<ngb-carousel *ngIf="images" class="carousel-inner" [showNavigationArrows]=false [interval]="5000">
+  <ng-template ngbSlide class="carousel-item">
+    <div class="img-wrapper banner">
+      <img [src]="images[1]" alt="Random first slide">
+    </div>
+    <div class="carousel-caption">
+      <h3>Get Vaccine alerts on your phone</h3>
+      <p>Register now to get alert on your phone whenever slot is empty in your nearby hospitals</p>
+      <p>Click below button to get started</p>
+      <p> <i class="fa fa-angle-down"></i></p>
+      <a routerLink="/subscribe" routerLinkActive="active">
+        <button class="btn btn-primary btn-lg">Subscribe Now For Free </button>
+       </a>
+    </div>
+
+  </ng-template>
+  <ng-template ngbSlide class="carousel-item">
+    <div class="img-wrapper banner">
+      <img [src]="images[0]" alt="Random first slide">
+    </div>
+    <div class="carousel-caption">
+      <h3>100% accurate data</h3>
+      <p>Register now to get alert on your whenever slot is empty in your nearby hospitals</p>
+      <p>Click below button to get started</p>
+
+      <p> <i class="fa fa-angle-down"></i></p>
+      <a routerLink="/subscribe" routerLinkActive="active">
+        <button class="btn btn-primary btn-lg">Subscribe Now For Free </button>
+       </a>
+    </div>
+  </ng-template>
+
+  <ng-template ngbSlide class="carousel-item">
+    <div class="img-wrapper banner">
+      <img [src]="images[2]" alt="Random first slide">
+    </div>
+    <div class="carousel-caption">
+      <h3>Get Vaccine alerts on your phone</h3>
+      <p>Register now to get alert on your phone whenever slot is empty in your nearby hospitals</p>
+      <p>Click below button to get started</p>
+
+      <p> <i class="fa fa-angle-down"></i></p>
+      <a routerLink="/subscribe" routerLinkActive="active">
+        <button class="btn btn-primary btn-lg">Subscribe Now For Free </button>
+       </a>
+       </div>
+  </ng-template>
+
+  <ng-template ngbSlide class="carousel-item">
+    <div class="img-wrapper banner">
+      <img [src]="images[3]" alt="Random first slide">
+    </div>
+    <div class="carousel-caption">
+      <h3>100% accurate data</h3>
+      <p>Register now to get alert on your whenever slot is empty in your nearby hospitals</p>
+      <p>Click below button to get started</p>
+
+      <p> <i class="fa fa-angle-down"></i></p>
+      <a routerLink="/subscribe" routerLinkActive="active">
+        <button class="btn btn-primary btn-lg">Subscribe Now For Free </button>
+       </a>
+    </div>
+  </ng-template>
+</ngb-carousel>

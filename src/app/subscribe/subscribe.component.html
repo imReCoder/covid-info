@@ -1,0 +1,166 @@
+<div class="main-wrapper">
+  
+  <!-- main container -->
+  <div class="body-content">
+<div class="header">
+  <div class="back-btn">
+    <i (click)="goBack()" class="fa fa-arrow-left"></i>
+  </div>
+  <h3>Subscribe Now</h3>
+</div>
+
+
+<div class="wrapper container" id="subscribe">
+
+<div class="info-wrapper" *ngIf="!allCentersFiltered" >
+  <div class="flex head">
+    <div class="icon"><img src="../../assets/icons/shield.png" alt=""></div>
+    <div class="title">
+      <p class="title-text">VACCINE WATCHER</p>
+      <p class="title-slogan">Get notified instantly for available  slots</p>
+    </div>
+
+  </div>
+ 
+</div>
+
+  <!-- pincode / district selector -->
+  <div class="taeb-switch left text-center" [ngClass]="active ? 'left' : 'right'">
+    <div [ngClass]="active ? 'active' : ''" class="taeb" (click)="switchTab(1)">Pincode</div>
+    <div [ngClass]="!active ? 'active' : ''" class="taeb" (click)="switchTab(0)">District</div>
+  </div>
+
+<!-- pincode input -->
+  <div class="pincodeInput" *ngIf="active" [@enterAnimation]>
+    <div class="flex">
+      <input type="text" id="pinCode" placeholder="Enter Pincode" maxlength="6"  [(ngModel)]="inputPincode">
+      <button *ngIf="inputPincode.length==6" class="btn" (click)="getByPincode()">Go !</button>
+    </div>
+
+  </div>
+
+  <!-- for state district -->
+  <div class="districtInput" *ngIf="!active" [@enterAnimation]>
+    <div class="state">
+      <div class="select">
+        <input class="sInput" placeholder="Select Your State"
+          (click)="stateInputClick()"
+          [(ngModel)]="statesSearchQuery" (input)="searchState(statesSearchQuery)" />
+        <div class="label"></div>
+        <div class="options" *ngIf="focusState" [@enterAnimationDropDown]>
+          <div class="opt" *ngFor="let state of filteredStatesData" (click)="selectState(state)">{{state.stateName}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skeleton-district" *ngIf="showSkeletonDistrict" >
+      <ngx-skeleton-loader count="5" animation="pulse"  [theme]="{ height: '30px',width:'95%'}"></ngx-skeleton-loader>
+    </div>
+
+
+    <div class="district" *ngIf="filteredDistrictData && filteredStatesData" [@enterAnimation]>
+      <div class="select">
+        <input class="dInput" placeholder="Select Your District"
+          (click)="districtInputClick()"
+          [(ngModel)]="districtSearchQuery" (input)="searchDistrict(districtSearchQuery)" />
+        <div class="label"></div>
+        <div class="options2" *ngIf="focusDistrict" [@enterAnimationDropDown]>
+          <div class="opt" *ngFor="let district of filteredDistrictData" (click)="selectDistrict(district)">
+            {{district.districtName}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- center list -->
+<div class="skeleton-wrapper" *ngIf=" showSkeletonCenters" [@enterAnimation]>
+
+  <ngx-skeleton-loader count="5" animation="pulse"  [theme]="{ height: '80px'}"></ngx-skeleton-loader>
+</div>
+<div class="centers-list-wrapper" *ngIf="allCentersFiltered && allCentersFiltered.length>0" [@enterAnimation]>
+  <div class="head" *ngIf="!noCenters">
+    <div class="filter-title">
+      <p>Filters</p>
+    </div>
+    <div class="filters">
+      <div class="row">
+        <div class="col">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{dose}}</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem (click)="changeDose('Dose - 1')">Dose - 1</button>
+              <button ngbDropdownItem  (click)="changeDose('Dose - 2')">Dose - 2</button>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col">
+          <div ngbDropdown class="d-inline-block" #vaccineDropDown="ngbDropdown" class="vaccine-drop-down">
+            <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>{{vaccineType}}</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+              <div class="form-check">
+                <label class="form-check-label" for="vaccineType">
+                  <input type="checkbox" class="form-check-input" id="check1" name="vaccineType" value="covaxin" [(ngModel)]="vaccines.COVAXIN.checked" (click)="$event.stopPropagation(); vaccineDropDown.close();" (change)="vaccineTypeChange()" checked>COVAXIN
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label" for="vaccineType">
+                  <input type="checkbox" class="form-check-input" id="check1" name="vaccineType" value="covieshield" [(ngModel)]="vaccines.COVIESHIELD.checked" (click)="$event.stopPropagation(); vaccineDropDown.close();" (change)="vaccineTypeChange()"  checked>COVIESHIELD
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div class="search-bar">
+      <div class="input-wrapper">
+        <input type="text" placeholder="Search By Hospital Name" [(ngModel)]="hospitalName" (input)="searchHospital(hospitalName)">
+        <i *ngIf="hospitalName.length>0" class="fa fa-times cross-icon" (click)="this.hospitalName='';this.searchHospital('')"></i>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="body">
+    <div class="no-centers" *ngIf="noCenters">
+      <div class="img">
+        <img src="../../assets/img/noCenters.png" alt="">
+      </div>
+      <div class="text">
+        <p>No centers found for this area.</p>
+        <p>Enter nearby area. </p>
+      </div>
+    </div>
+    <ul *ngIf="!noCenters">
+      <li class="list-item flex" *ngFor="let center of allCentersFiltered">
+        <div class="main">
+          <div class="list-title">
+            <h3>{{center.name}}</h3>
+          </div>
+          <div class="list-body flex">
+            <i class="fa fa-map-marker-alt icon"></i>
+            <p class="address">{{center.address}}</p>
+            
+          </div>
+          <div class="form-check check-subscribe">
+            <label class="form-check-label" for="vaccineType">
+              <input type="checkbox" class="form-check-input check-subscribe" id="check1" name="vaccineType" value="covieshield">SUBSCRIBE
+            </label>
+          </div>
+        </div>
+        <div class="arrow">
+          <i class="fa fa-chevron-right"></i>
+        </div>
+        
+      </li>
+     
+    </ul>
+   
+  </div>
+</div>
+
+</div>
+</div>
+
+</div>

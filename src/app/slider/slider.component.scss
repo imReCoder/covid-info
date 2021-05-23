@@ -1,0 +1,45 @@
+
+.carousel-inner .carousel-item{
+    background-position:center;
+    font-family: 'Muli';
+    scroll-behavior: smooth;
+}
+
+.carousel-caption{
+    // border: solid red;
+    left:0;
+    right:0;
+    top:0;
+    background-color: rgba(0,0,0,0.4);
+    padding:10%;
+    padding-top: 170px;
+    h3{
+        font-size:calc(1em + 15px);
+    }
+    p{
+        font-size:calc(.5em + 10px);
+    }
+    button{
+        // width:200px;
+        margin:10px;
+    }
+    @media only screen and (min-width: 950px) {
+       
+        h3{
+            font-size:calc(2em + 35px);
+        }
+        p{
+            font-size:calc(1em + 20px);
+        }
+      }
+}
+
+.banner{
+	height: 93vh;
+    img{
+        height:98%;
+        width: 100%;
+        object-fit: cover;
+
+    }
+}
