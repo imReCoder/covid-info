@@ -30,6 +30,28 @@
     <div [ngClass]="!active ? 'active' : ''" class="taeb" (click)="switchTab(0)">District</div>
   </div>
 
+
+
+<!-- phone input -->
+<div class="phoneInput" *ngIf="active" [@enterAnimation]>
+  <div class="flex">
+    <input type="text" id="phoneNum" placeholder="Enter Phone Number" maxlength="10"  [(ngModel)]="inputPhone">
+    <button *ngIf="inputPhone.length==10" class="btn">Send</button>
+  </div>
+
+</div>
+
+
+
+<!-- phone otp input -->
+<div class="phoneOTP" *ngIf="active" [@enterAnimation]>
+  <div class="flex">
+    <input type="text" id="phoneOTP" placeholder="Enter received otp" maxlength="6"  [(ngModel)]="inputOTP">
+    <button *ngIf="inputOTP.length>=4" class="btn">Verify</button>
+  </div>
+
+</div>
+
 <!-- pincode input -->
   <div class="pincodeInput" *ngIf="active" [@enterAnimation]>
     <div class="flex">

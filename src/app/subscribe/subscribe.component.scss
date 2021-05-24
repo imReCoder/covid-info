@@ -135,12 +135,14 @@ $duration: 0.1s;
   color: #ffffff;
 }
 
-//css for pincode input
-.pincodeInput {
+
+
+//css for pincode , phone, otp input
+.pincodeInput,.phoneInput,.phoneOTP {
   margin-top: 50px;
   input {
     color: black;
-    width: 80%;
+    width: 70%;
     border: none;
     background: none;
     border-bottom: 2px solid $color;

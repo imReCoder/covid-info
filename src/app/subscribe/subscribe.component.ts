@@ -45,6 +45,8 @@ export class SubscribeComponent implements OnInit {
   focusDistrict: boolean = false;
 
   inputPincode: string = '';
+  inputPhone:string='';
+  inputOTP:string='';
   
   statesData;
   filteredStatesData;
@@ -75,6 +77,7 @@ export class SubscribeComponent implements OnInit {
   noCenters: boolean = false;
    showSkeletonCenters:boolean=false;
    showSkeletonDistrict:boolean=false;
+   
   constructor( private api: ApiServiceService, private location: Location) { }
 
   ngOnInit(): void {
